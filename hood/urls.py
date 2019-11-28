@@ -3,4 +3,5 @@ from . import views
 
 urlpatterns = [
     re_path('^$', views.home, name='home'),
+    path('register/',views.register, name='register'),
 ]
