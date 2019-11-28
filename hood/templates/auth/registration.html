@@ -10,16 +10,13 @@
             <div class="field">
                 {%render_field form.full_name %}
             </div>
-            <div>
+            <div class="field">
                 {%render_field form.username %}
             </div>
-            <div>
-                <div>
-                    {{form.username.errors}}
-                </div>
+            <div class="field">
                 {% render_field form.email %}
             </div>
-            <div>
+            <div class="field">
                 {% render_field form.password %}
             </div>
             <button class="ui submit button">
