@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'hood.apps.HoodConfig',
     'django_semantic_ui',
+    'semanticuiforms',
 ]
 
 MIDDLEWARE = [
