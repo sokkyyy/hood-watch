@@ -1,0 +1,15 @@
+{% load dsu %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Semantic UI Test</title>
+    {% dsu_stylesheet_url %}
+</head>
+<body>
+    {%block content%} {%endblock%}
+    <!-- Your HTML code -->
+    {% dsu_jquery_url %}
+    {% dsu_javascript_url %}
+</body>
+</html>
