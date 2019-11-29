@@ -1,13 +1,13 @@
 from django.shortcuts import render,redirect
-from .forms import RegForm
+from .forms import RegForm,LoginForm
 from .models import User
+from django.contrib.auth import authenticate,login,logout
+from django import forms
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
 
 def register(request):
-    
-
     if request.method == 'POST':
         form = RegForm(request.POST)
         if form.is_valid():
@@ -20,8 +20,27 @@ def register(request):
             new_user.full_name = full_name
             new_user.save()
 
-            return redirect(home)
+            return redirect(user_login)
     else:
         form = RegForm()
+
     return render(request,'auth/registration.html',
     {'form':form})
+
+
+def user_login(request):
+    
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+
+            user = User.objects.get(email=email)
+
+            login(request,user)
+            return redirect(home)                
+    else:
+        form = LoginForm()
+
+    return render(request, 'auth/login.html',
+    {"form":form})
