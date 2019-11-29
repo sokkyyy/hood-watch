@@ -19,6 +19,17 @@
             <div class="field">
                 {% render_field form.password %}
             </div>
+            <div class="field">
+                <label>Location</label>
+                <select class="ui dropdown" name='location' required>
+                    <option value="">Select your Location</option>
+                    <option value="woodley">Woodley</option>
+                    <option value="makina">Makina</option>
+                    <option value="sarangombe">Sarang'ombe</option>
+                    <option value="lainisaba">Laini Saba</option>
+                    <option value="lindi">Lindi</option>
+                </select>
+            </div>
             <button class="ui submit button">
                 Register
             </button>
@@ -26,4 +37,13 @@
     </div>
     <div class="four wide column"></div>
 </div>
+{%endblock%}
+
+{%block scripts%}
+{{block.super}}
+<script>
+$('.ui.dropdown')
+  .dropdown()
+;
+</script>
 {%endblock%}

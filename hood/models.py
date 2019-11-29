@@ -8,8 +8,18 @@ class User(AbstractUser):
     full_name = models.CharField(max_length=254)
 
 class Neighborhood(models.Model):
-    name = models.CharField(max_length=100, default='Kibra')
+    location = models.CharField(max_length=100, default='Kibra')
+    # occupants = models
 
     def __str__(self):
-        return self.name    
+        return self.location
+
+class Hood(models.Model):
+    neighbourhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='hoods')
+    name = models.CharField(max_length=240)
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
 

@@ -10,7 +10,10 @@
     {%include 'navbar.html'%}
     {%block content%} {%endblock%}
     <!-- Your HTML code -->
-    {% dsu_jquery_url %}
-    {% dsu_javascript_url %}
+
+    {%block scripts%}
+        {% dsu_jquery_url %}
+        {% dsu_javascript_url %}
+    {%endblock%}
 </body>
 </html>

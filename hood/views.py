@@ -15,12 +15,14 @@ def register(request):
             email = form.cleaned_data['email']
             full_name = form.cleaned_data['full_name']
             password = form.cleaned_data['password']
+            location = request.POST['location']
+            print(location == 'woodley')
 
-            new_user = User.objects.create_user(username,email,password)
-            new_user.full_name = full_name
-            new_user.save()
-
-            return redirect(user_login)
+            #new_user = User.objects.create_user(username,email,password)
+            #new_user.full_name = full_name
+            #new_user.save()
+#
+            #return redirect(user_login)
     else:
         form = RegForm()
 
