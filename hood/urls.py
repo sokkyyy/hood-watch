@@ -8,6 +8,7 @@ urlpatterns = [
     re_path('^$', views.home, name='home'),
     path('register/',views.register, name='register'),
     path('login/',views.user_login,name='login'),
+    path('profile/<int:user_id>/',views.user_profile,name='profile'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

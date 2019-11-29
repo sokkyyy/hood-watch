@@ -57,3 +57,6 @@ def user_login(request):
 
     return render(request, 'auth/login.html',
     {"form":form})
+
+def user_profile(request, user_id):
+    return render(request,'profile.html')

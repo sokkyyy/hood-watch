@@ -16,11 +16,13 @@
         <div class="ui simple dropdown item">
           Account
           <i class="dropdown icon"></i>
+          {% if user.is_authenticated %}
           <div class="menu">
-            <a class="item" href="#"><i class="user icon"></i>Profile</a>
+            <a class="item" href="{% url 'profile' user.id %}"><i class="user icon"></i>Profile</a>
             <div class="item"></div>
             <a class="item"><i class="sign-out icon"></i>Sign Out</a>
           </div>
+          {%endif%}
         </div>
       </div>
     </div>
