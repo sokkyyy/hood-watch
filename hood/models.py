@@ -6,6 +6,7 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     email = models.EmailField(max_length=254, unique=True)
     full_name = models.CharField(max_length=254)
+    profile_pic = models.ImageField(upload_to='profile_pics/',default='profile_pics/avatar.png')
 
 class Neighborhood(models.Model):
     location = models.CharField(max_length=100, default='Kibra')
