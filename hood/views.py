@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from .forms import RegForm,LoginForm
-from .models import User
+from .models import User,Neighborhood,Hood
 from django.contrib.auth import authenticate,login,logout
 from django import forms
 # Create your views here.
@@ -16,13 +16,24 @@ def register(request):
             full_name = form.cleaned_data['full_name']
             password = form.cleaned_data['password']
             location = request.POST['location']
-            print(location == 'woodley')
 
-            #new_user = User.objects.create_user(username,email,password)
-            #new_user.full_name = full_name
-            #new_user.save()
-#
-            #return redirect(user_login)
+
+            
+
+            new_user = User.objects.create_user(username,email,password)
+            new_user.full_name = full_name
+            new_user.save()
+
+            #Neighbourhood Instatiations
+            neighborhood = Neighborhood()
+            neighborhood.save()
+            #Hood Instatiations
+            new_hood = Hood(neighborhood=neighborhood,name=location,user=new_user)
+            new_hood.save()
+
+
+
+            return redirect(user_login)
     else:
         form = RegForm()
 

@@ -15,7 +15,7 @@ class Neighborhood(models.Model):
         return self.location
 
 class Hood(models.Model):
-    neighbourhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='hoods')
+    neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, related_name='hoods')
     name = models.CharField(max_length=240)
     user = models.OneToOneField(User,on_delete=models.CASCADE)
 

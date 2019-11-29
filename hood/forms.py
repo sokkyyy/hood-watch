@@ -8,11 +8,14 @@ class RegForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['full_name', 'email', 'username', 'password']
+        widgets = {
+            'password':forms.PasswordInput()
+        }
 
 class LoginForm(forms.Form):
     
     email = forms.EmailField()
-    password = forms.CharField(max_length=240)
+    password = forms.CharField(max_length=240,widget=forms.PasswordInput())
     
     def clean(self):
         cleaned_data = super().clean()
