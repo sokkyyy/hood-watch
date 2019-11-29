@@ -20,6 +20,12 @@ class Hood(models.Model):
     name = models.CharField(max_length=240)
     user = models.OneToOneField(User,on_delete=models.CASCADE)
 
+    @classmethod
+    def get_user_hood(cls, user):
+        hood = cls.objects.get(user=user)
+        return hood
+
+
     def __str__(self):
         return self.name
 

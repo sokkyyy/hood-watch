@@ -59,4 +59,8 @@ def user_login(request):
     {"form":form})
 
 def user_profile(request, user_id):
-    return render(request,'profile.html')
+    user = User.objects.get(pk=user_id)
+    hood = Hood.get_user_hood(user) 
+
+    return render(request,'profile.html',{'user':user,
+    'hood':hood})

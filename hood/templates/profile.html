@@ -1,10 +1,141 @@
 {%extends 'base.html' %}
-
+{%load static%}
 {%block content %}
 <div class="ui grid">
     <div class="two wide column"></div>
-    <div class="six wide column"></div>
-    <div class="six wide column"></div>
-    <div class="two wide column"></div>
+    <div class="eight wide column">
+        <div class="three wide column" style="display: flex; flex-direction: row;">
+            <div class="profilePic">
+
+            </div>
+            <div class="ui segments">
+                <div class="ui segment" style="width:400px">
+                    <div class="ui items">
+                        <div class="item">
+                            <div class="content">
+                              <div class="header">Full Name</div>
+                              <div class="meta" style="float: right; margin-top:15px;">{{user.full_name  }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui segment">
+                    <div class="ui items">
+                        <div class="item">
+                            <div class="content">
+                              <div class="header">Username</div>
+                              <div class="meta" style="float: right; margin-top:15px;">{{user.username}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui segment">
+                    <div class="ui items">
+                        <div class="item">
+                            <div class="content">
+                              <div class="header">Email</div>
+                              <div class="meta" style="float: right; margin-top:15px;">{{user.email}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui segment">
+                    <div class="ui items">
+                        <div class="item">
+                            <div class="content">
+                              <div class="header">Neighborhood</div>
+                              <div class="meta" style="float: right; margin-top:15px;">{{hood.neighborhood.location}}</div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="content">
+                              <div class="header" style="font-size: 17px;">Location</div>
+                              <div class="meta" >{{hood.name}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+    <div class="five wide column" style="margin-top: 20px;">
+            <div class="ui styled accordion">
+                <div class="title">
+                  <i class="dropdown icon"></i>
+                <span>Edit Name</span>
+                </div>
+                <div class="content">
+                    <form class="ui form">
+                        <div class="field">
+                            <label>Full Name</label>
+                            <input type="text" name="full_name" required>
+                        </div>
+                        <button class="ui submit button">Change Name</button>
+                    </form>
+                </div>
+
+                <div class="title">
+                    <i class="dropdown icon"></i>
+                  <span>Add Content to Your Location</span>
+                  </div>
+                  <div class="content" style="display: flex;flex-direction: column;">
+                    <a class="transition hidden">Add a Business</a>
+                    <a class="transition hidden">Post about your Location</a>
+                </div>
+
+                <div class="title">
+                    <i class="dropdown icon"></i>
+                  <span>Move Out of Location</span>
+                  </div>
+                  <div class="content">
+                    <form class="ui form">
+                        <div class="field">
+                            <label>Location</label>
+                            <select class="ui dropdown" name='location' required>
+                                <option value="">Select your Location</option>
+                                <option value="woodley">Woodley</option>
+                                <option value="makina">Makina</option>
+                                <option value="sarangombe">Sarang'ombe</option>
+                                <option value="lainisaba">Laini Saba</option>
+                                <option value="lindi">Lindi</option>
+                            </select>                        
+                        </div>
+                        <button class="ui submit button">Move Out</button>
+                    </form>
+                </div>
+            </div>
+
+    </div>
+    <div class="column"></div>
+
 </div>
+
+{%block css%}
+{{block.super}}
+<style>
+.profilePic {
+    background-image: url('{{user.profile_pic.url}}'); 
+
+    height: 200px; 
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 400px;
+}
+</style>
 {%endblock%}
+{%endblock%}
+
+{%block scripts%}
+{{block.super}}
+
+<script>
+$('.ui.accordion')
+  .accordion()
+;
+$('.ui.dropdown')
+  .dropdown()
+;
+</script>
+{%endblock%}
+
