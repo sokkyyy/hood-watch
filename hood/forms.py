@@ -1,5 +1,5 @@
 from django import forms
-from .models import User
+from .models import User,Business
 from django.contrib.auth import authenticate
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.hashers import check_password
@@ -31,6 +31,11 @@ class LoginForm(forms.Form):
             if not check_password(password,user.password):
                 psw_msg = forms.ValidationError('Invalid Password')
                 self.add_error('password',psw_msg)
-        
+
+class BusinessForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        fields = ['name','description',]
+
 
 

@@ -1,0 +1,66 @@
+{%extends 'base.html' %}
+{% load semanticui %}
+
+
+{%block content %}
+<div class="ui internally celled grid">
+    <div class="row">
+      <div class="three wide column">
+        <img>
+      </div>
+      <div class="ten wide column">
+        <p></p>
+      </div>
+      <div class="three wide column">
+          <p>ADD A BUSINESS</p>
+        <form class='ui form' method="POST" action="{% url 'services' hood.name %}">
+            {%csrf_token%}
+            <div class="field">
+                {%render_field business_form.name%}
+            </div>
+            <div class="field">
+                {%render_field business_form.description%}
+            </div>
+            <div class="field">
+                <label>Business Category</label>
+                <select class="ui dropdown" name='category' required>
+                    <option value="">Select category</option>
+                    <option value="carpentry">Carpentry</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="hardware">Hardware</option>
+                    <option value="liqour">Liqour Store</option>
+                    <option value="restaurant">Restaurant</option>
+                    <option value="salon">Salon & Beauty</option>
+                </select>  
+            </div>
+            <button type="submit" class="ui submit button">Add Business</button>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="three wide column">
+        <img>
+      </div>
+      <div class="ten wide column">
+        <p></p>
+      </div>
+      <div class="three wide column">
+        <img>
+      </div>
+    </div>
+  </div>
+  
+{%endblock%}
+
+{%block scripts%}
+{{block.super}}
+
+<script>
+$('.ui.accordion')
+  .accordion()
+;
+$('.ui.dropdown')
+  .dropdown()
+;
+</script>
+{%endblock%}

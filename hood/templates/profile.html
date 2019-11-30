@@ -1,5 +1,6 @@
 {%extends 'base.html' %}
 {%load static%}
+{% load semanticui %}
 {%block content %}
 <div class="ui grid">
     <div class="two wide column"></div>
@@ -50,7 +51,7 @@
                         <div class="item">
                             <div class="content">
                               <div class="header" style="font-size: 17px;">Location</div>
-                              <div class="meta" >{{hood.name}}</div>
+                              <div class="meta" style="float: right; margin-top:15px;">{{hood.name}}</div>
                             </div>
                         </div>
                     </div>
@@ -79,8 +80,40 @@
                   <span>Add Content to Your Location</span>
                   </div>
                   <div class="content" style="display: flex;flex-direction: column;">
-                    <a class="transition hidden">Add a Business</a>
+                    <a href="#" class="transition hidden" id="businessModal">Add a Business</a>
                     <a class="transition hidden">Post about your Location</a>
+                    
+                    
+                    <!-- MODAL FOR BUSINESS -->
+                    <div class="ui modal business">
+                        <div class="header">Add A Business to {{hood.name}}</div>
+                        <div class="content">
+                                <div class="three wide column">
+                                      <form class='ui form' method="POST" action="{% url 'services' hood.name %}">
+                                          {%csrf_token%}
+                                          <div class="field">
+                                              {%render_field business_form.name%}
+                                          </div>
+                                          <div class="field">
+                                              {%render_field business_form.description%}
+                                          </div>
+                                          <div class="field">
+                                              <label>Business Category</label>
+                                              <select class="ui dropdown" name='category' required>
+                                                  <option value="">Select category</option>
+                                                  <option value="carpentry">Carpentry</option>
+                                                  <option value="electronics">Electronics</option>
+                                                  <option value="hardware">Hardware</option>
+                                                  <option value="liqour">Liqour Store</option>
+                                                  <option value="restaurant">Restaurant</option>
+                                                  <option value="salon">Salon & Beauty</option>
+                                              </select>  
+                                          </div>
+                                          <button type="submit" class="ui submit button">Add Business</button>
+                                      </form>
+                                </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="title">
@@ -135,6 +168,9 @@ $('.ui.accordion')
 ;
 $('.ui.dropdown')
   .dropdown()
+;
+$('.ui.modal.business')
+  .modal('attach events','#businessModal','show')
 ;
 </script>
 {%endblock%}

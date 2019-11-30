@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .forms import RegForm,LoginForm
+from .forms import RegForm,LoginForm,BusinessForm
 from .models import User,Neighborhood,Hood
 from django.contrib.auth import authenticate,login,logout
 from django import forms
@@ -60,7 +60,20 @@ def user_login(request):
 
 def user_profile(request, user_id):
     user = User.objects.get(pk=user_id)
-    hood = Hood.get_user_hood(user) 
-
+    hood = Hood.get_user_hood(user)
+    business_form = BusinessForm() 
     return render(request,'profile.html',{'user':user,
-    'hood':hood})
+    'hood':hood,"business_form":business_form})
+
+def hood_services(request,hood):
+    hood = Hood.objects.get(name=hood)
+    if request.method == 'POST':
+        form = BusinessForm(request.POST)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.category = request.POST['category']
+            business.hood = hood
+            business.user = request.user
+            business.save()
+
+    return redirect(user_profile, request.user.id)
