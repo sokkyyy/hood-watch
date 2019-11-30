@@ -39,3 +39,16 @@ class Business(models.Model):
 
     def __str__(self):
         return self.name
+
+class PublicService(models.Model):
+    SERVICE_CHOICES = (
+        ('police', 'Police Department'),
+        ('health', 'Health & Sanitary Department'),
+    )
+    name = models.CharField(max_length=240)
+    category = models.CharField(max_length=100,choices=SERVICE_CHOICES)
+    contacts = models.CharField(max_length=240)
+    hood = models.ForeignKey(Hood,on_delete=models.CASCADE,related_name='public_services')
+
+    def __str__(self):
+        return self.name

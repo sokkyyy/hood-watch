@@ -65,6 +65,7 @@ def user_profile(request, user_id):
     return render(request,'profile.html',{'user':user,
     'hood':hood,"business_form":business_form})
 
+# Handles submissions for businesses
 def hood_services(request,hood):
     hood = Hood.objects.get(name=hood)
     if request.method == 'POST':
