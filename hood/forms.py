@@ -1,5 +1,5 @@
 from django import forms
-from .models import User,Business
+from .models import User,Business,Post
 from django.contrib.auth import authenticate
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.hashers import check_password
@@ -37,5 +37,9 @@ class BusinessForm(forms.ModelForm):
         model = Business
         fields = ['name','description',]
 
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title','description',]
 
 
