@@ -89,16 +89,7 @@ def user_profile(request, user_id):
 # Handles submissions for businesses
 def hood_services(request,hood):
     hood = Hood.objects.get(name=hood)
-    if request.method == 'POST':
-        form = BusinessForm(request.POST)
-        if form.is_valid():
-            business = form.save(commit=False)
-            business.category = request.POST['category']
-            business.hood = hood
-            business.user = request.user
-            business.save()
- 
-    return redirect(user_profile, request.user.id)
+    return render(request, 'services.html')
 # Handles submissions for posts
 def hood_posts(request,hood):
     hood = Hood.objects.get(name=hood)
