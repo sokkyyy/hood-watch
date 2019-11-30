@@ -89,8 +89,9 @@ def user_profile(request, user_id):
 def hood_services(request,hood):
     hood = Hood.objects.get(name=hood)
     businesses = Business.objects.filter(hood=hood)
+    posts = Post.objects.filter(hood=hood)
     return render(request, 'services.html',{'hood':hood,
-    'businesses':businesses})
+    'businesses':businesses,'posts':posts})
 
 
 # Handles submissions for businesses

@@ -21,14 +21,19 @@
       </div>
       <div class="eight wide column">
           <div class="ui cards">
+            {%for post in posts %}
             <div class="card">
               <div class="content">
-                <div class="header">Elliot Fu</div>
-                <div class="meta">Friend</div>
+                <img class="right floated mini ui image" src="{{post.user.profile_pic.url}}">
+                <div class="header">{{post.title}}</div>
+                <hr>
+                <div class="meta">{{post.category}}|{{post.posted}}</div>
                 <div class="description">
-                  Elliot Fu is a film-maker from New York.
+                  {{post.description}}
                 </div>
+              </div>
             </div>
+            {%endfor%}
           </div>
       </div>
       <div class="four wide column">

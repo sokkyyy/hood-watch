@@ -59,6 +59,7 @@ class Post(models.Model):
     description = models.TextField()
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='posts')
     hood = models.ForeignKey(Hood,on_delete = models.CASCADE,related_name='posts')
+    # posted =
 
     def __str__(self):
         return self.title
