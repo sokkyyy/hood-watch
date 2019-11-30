@@ -6,7 +6,7 @@
     <div class="two wide column"></div>
     <div class="eight wide column">
         <div class="three wide column" style="display: flex; flex-direction: row;">
-            <div class="profilePic">
+            <div class="profilePic" >
 
             </div>
             <div class="ui segments">
@@ -78,13 +78,24 @@
 
                 <div class="title">
                     <i class="dropdown icon"></i>
-                  <span>Add Content to Your Location</span>
+                  <span>Add Content to {{hood.name|capfirst}}</span>
                   </div>
                   <div class="content" style="display: flex;flex-direction: column;">
                     <a href="#" class="transition hidden" id="businessModal">Add a Business</a>
                     <a class="transition hidden" id="posts">Post about your Location</a>
                     
-                    
+                    <div class="ui modal pic">
+                        <div class="header">Change Profile Pic</div>
+                        <div class="content">
+                            <form method="POST" class="ui form" enctype="multipart/form-data">
+                                {%csrf_token%}
+                                <div class="field">
+                                    <input type="file" name="profile_pic" id="">
+                                </div>
+                                <button class="ui submit button">Upload</button>
+                            </form>
+                        </div>
+                    </div>
                     <!-- MODAL FOR BUSINESS -->
                     <div class="ui modal business">
                         <div class="header">Add A Business to {{hood.name}}</div>
@@ -147,7 +158,7 @@
 
                 <div class="title">
                     <i class="dropdown icon"></i>
-                  <span>Move Out of Location</span>
+                  <span>Move out of {{hood.name|capfirst}}</span>
                   </div>
                   <div class="content">
                     <form class="ui form" method="POST">
@@ -178,7 +189,7 @@
 <div class="ui grid">
     <div class="two wide column"></div>
     <div class="twelve wide column">
-        <div class="ui top attached tabular menu" style="padding-left: 250px;">
+        <div class="ui top attached tabular menu" style="padding-left: 300px;">
             <a class="item active" data-tab="first">Your Businesses</a>
             <a class="item" data-tab="second">Your Posts</a>
             <a class="item" data-tab="third">Your Activity</a>
@@ -190,7 +201,7 @@
                   <div class="content">
                     <div class="header">{{business.name}}</div>
                     <div class="meta">
-                        <span>{{business.category}}</span>
+                        <span>{{business.category}}|{{business.hood.name}}</span>
                         <span>{{business.contacts}}</span>
                     </div>
                     <div class="description">
@@ -201,12 +212,27 @@
             {%endfor%}
             </div> 
           </div>
-          
+
           <div class="ui bottom attached tab segment" data-tab="second">
-            Second
+                <div class="ui cards">
+                    {%for post in user_posts %}
+                    <div class="card">
+                      <div class="content">
+                        <div class="header">{{post.title}}</div>
+                        <hr>
+                        <div class="meta">
+                            <span>{{post.category}}|{{post.hood.name}}</span>
+                        </div>
+                        <div class="description">
+                            {{post.description}}
+                        </div>
+                      </div>
+                    </div>
+                    {%endfor%}
+                </div>
           </div>
           <div class="ui bottom attached tab segment" data-tab="third">
-            Third
+            No activity
           </div>
     </div>
     <div class="two wide column"></div>
@@ -220,12 +246,13 @@
 <style>
 .profilePic {
     background-image: url('{{user.profile_pic.url}}'); 
-
+    cursor: pointer;
     height: 200px; 
     background-position: center; 
     background-repeat: no-repeat;
     background-size: cover;
     width: 400px;
+    margin-top: 70px;
 }
 </style>
 {%endblock%}
@@ -246,6 +273,9 @@ $('.ui.modal.business')
 ;
 $('.ui.modal.posts')
   .modal('attach events','#posts','show')
+;
+$('.ui.modal.pic')
+  .modal('attach events','.profilePic','show')
 ;
 $('.menu .item')
   .tab()

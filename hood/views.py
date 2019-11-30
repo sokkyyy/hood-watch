@@ -66,6 +66,7 @@ def user_profile(request, user_id):
     post_form = PostForm()
 
     user_business = Business.objects.filter(user=user)
+    user_posts = Post.objects.filter(user=user)
 
     if 'location' in request.POST and request.method =='POST':
         location = request.POST['location']
@@ -82,7 +83,7 @@ def user_profile(request, user_id):
      
     return render(request,'profile.html',{'user':user,
     'hood':hood,"business_form":business_form,'post_form':post_form,
-    'user_business':user_business})
+    'user_business':user_business,'user_posts':user_posts})
 
 # Handles submissions for businesses
 def hood_services(request,hood):
