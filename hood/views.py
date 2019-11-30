@@ -70,6 +70,13 @@ def user_profile(request, user_id):
         hood.name = location
         hood.save()
         return redirect(user_profile, user.id)
+    
+    if 'full_name' in request.POST and request.method == 'POST':
+        new_name = request.POST['full_name']
+        user.full_name = new_name
+        user.save()
+        return redirect(user_profile,user.id)
+
      
     return render(request,'profile.html',{'user':user,
     'hood':hood,"business_form":business_form,'post_form':post_form})
