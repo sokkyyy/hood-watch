@@ -66,7 +66,8 @@
                 <span>Edit Name</span>
                 </div>
                 <div class="content">
-                    <form class="ui form">
+                    <form class="ui form" method="POST">
+                        {%csrf_token%}
                         <div class="field">
                             <label>Full Name</label>
                             <input type="text" name="full_name" required>
@@ -81,7 +82,7 @@
                   </div>
                   <div class="content" style="display: flex;flex-direction: column;">
                     <a href="#" class="transition hidden" id="businessModal">Add a Business</a>
-                    <a class="transition hidden">Post about your Location</a>
+                    <a class="transition hidden" id="posts">Post about your Location</a>
                     
                     
                     <!-- MODAL FOR BUSINESS -->
@@ -114,6 +115,34 @@
                                 </div>
                         </div>
                     </div>
+                    <!-- MODAL FOR POSTS -->
+                    <div class="ui modal posts">
+                        <div class="header">Create A Post.{{hood.name}}</div>
+
+                        <div class="content">
+                                <div class="three wide column">
+                                      <form class='ui form' method="POST" action="{% url 'posts' hood.name %}">
+                                          {%csrf_token%}
+                                          <div class="field">
+                                              {%render_field post_form.title%}
+                                          </div>
+                                          <div class="field">
+                                              {%render_field post_form.description%}
+                                          </div>
+                                          <div class="field">
+                                              <label>Post Category</label>
+                                              <select class="ui dropdown" name='category' required>
+                                                  <option value="">Select category</option>
+                                                  <option value="business">Business</option>
+                                                  <option value="security">Security/Threats</option>
+                                                  <option value="welfare">Location Welfare</option>
+                                              </select>  
+                                          </div>
+                                          <button type="submit" class="ui submit button">Post</button>
+                                      </form>
+                                </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="title">
@@ -121,9 +150,12 @@
                   <span>Move Out of Location</span>
                   </div>
                   <div class="content">
-                    <form class="ui form">
+                    <form class="ui form" method="POST">
+                        {%csrf_token%}
                         <div class="field">
                             <label>Location</label>
+                            <hr>
+                            <label><small>Choose another Location within Kibra Neighborhood</small></label>
                             <select class="ui dropdown" name='location' required>
                                 <option value="">Select your Location</option>
                                 <option value="woodley">Woodley</option>
@@ -171,6 +203,9 @@ $('.ui.dropdown')
 ;
 $('.ui.modal.business')
   .modal('attach events','#businessModal','show')
+;
+$('.ui.modal.posts')
+  .modal('attach events','#posts','show')
 ;
 </script>
 {%endblock%}

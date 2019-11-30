@@ -61,8 +61,16 @@ def user_login(request):
 def user_profile(request, user_id):
     user = User.objects.get(pk=user_id)
     hood = Hood.get_user_hood(user)
+
     business_form = BusinessForm()
-    post_form = PostForm() 
+    post_form = PostForm()
+
+    if 'location' in request.POST and request.method =='POST':
+        location = request.POST['location']
+        hood.name = location
+        hood.save()
+        return redirect(user_profile, user.id)
+     
     return render(request,'profile.html',{'user':user,
     'hood':hood,"business_form":business_form,'post_form':post_form})
 
@@ -81,4 +89,13 @@ def hood_services(request,hood):
     return redirect(user_profile, request.user.id)
 # Handles submissions for posts
 def hood_posts(request,hood):
+    hood = Hood.objects.get(name=hood)
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.category = request.POST['category']
+            post.user = request.user
+            post.hood = hood
+            post.save()
     return redirect(user_profile, request.user.id)
