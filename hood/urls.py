@@ -11,7 +11,8 @@ urlpatterns = [
     path('profile/<int:user_id>/',views.user_profile,name='profile'),
     path('services/<str:hood>/',views.hood_services, name='services'),
     path('hood/posts/<str:hood>/',views.hood_posts,name='posts'),
-    path('profile/pic/change/',views.change_profile_pic,name='change_pic') 
+    path('profile/pic/change/',views.change_profile_pic,name='change_pic'),
+    path('profile/business/add/',views.submit_business,name='business'), 
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

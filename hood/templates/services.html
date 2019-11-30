@@ -6,13 +6,13 @@
 <div class="ui internally celled grid">
     <div class="row">
       <div class="four wide column">
-        <img>
+        <h4>Public Services</h4>
       </div>
       <div class="eight wide column">
-        <p></p>
+        <h4>Posts about {{hood.name|capfirst}}</h4>
       </div>
       <div class="four wide column">
-        
+        <h4>Businesses in {{hood.name|capfirst}}</h4>
       </div>
     </div>
     <div class="row">
@@ -20,10 +20,30 @@
         <img>
       </div>
       <div class="eight wide column">
-        <p></p>
+          <div class="ui cards">
+            <div class="card">
+              <div class="content">
+                <div class="header">Elliot Fu</div>
+                <div class="meta">Friend</div>
+                <div class="description">
+                  Elliot Fu is a film-maker from New York.
+                </div>
+            </div>
+          </div>
       </div>
       <div class="four wide column">
-        <img>
+          <div class="ui accordion">
+            {%for business in businesses%}
+              <div class="title">
+                <i class="dropdown icon"></i>
+                {{business.name}}
+              </div>  
+              <div class="content">
+                <p class="transition hidden">{{business.description}}</p>
+                <p class="transition hidden">{{business.contacts}}</p>
+              </div>
+            {%endfor%}
+          </div>
       </div>
     </div>
   </div>

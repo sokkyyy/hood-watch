@@ -101,7 +101,7 @@
                         <div class="header">Add A Business to {{hood.name}}</div>
                         <div class="content">
                                 <div class="three wide column">
-                                      <form class='ui form' method="POST" action="{% url 'services' hood.name %}">
+                                      <form class='ui form' method="POST" action="{% url 'business'%}">
                                           {%csrf_token%}
                                           <div class="field">
                                               {%render_field business_form.name%}
