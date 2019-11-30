@@ -43,3 +43,7 @@ class PostForm(forms.ModelForm):
         fields = ['title','description',]
 
 
+class ChangePic(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['profile_pic']

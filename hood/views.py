@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .forms import RegForm,LoginForm,BusinessForm,PostForm
+from .forms import RegForm,LoginForm,BusinessForm,PostForm,ChangePic
 from .models import User,Neighborhood,Hood,Business,Post
 from django.contrib.auth import authenticate,login,logout
 from django import forms
@@ -64,6 +64,7 @@ def user_profile(request, user_id):
 
     business_form = BusinessForm()
     post_form = PostForm()
+    pic_form =ChangePic()
 
     user_business = Business.objects.filter(user=user)
     user_posts = Post.objects.filter(user=user)
@@ -79,11 +80,11 @@ def user_profile(request, user_id):
         user.full_name = new_name
         user.save()
         return redirect(user_profile,user.id)
-
-     
+         
     return render(request,'profile.html',{'user':user,
     'hood':hood,"business_form":business_form,'post_form':post_form,
-    'user_business':user_business,'user_posts':user_posts})
+    'user_business':user_business,'user_posts':user_posts,
+    'pic_form':pic_form})
 
 # Handles submissions for businesses
 def hood_services(request,hood):
@@ -98,8 +99,6 @@ def hood_services(request,hood):
             business.save()
  
     return redirect(user_profile, request.user.id)
-
-
 # Handles submissions for posts
 def hood_posts(request,hood):
     hood = Hood.objects.get(name=hood)
@@ -112,3 +111,15 @@ def hood_posts(request,hood):
             post.hood = hood
             post.save()
     return redirect(user_profile, request.user.id)
+# Handle profile pic changes
+def change_profile_pic(request):
+    user = request.user
+    if request.method == 'POST':
+        pic_form = ChangePic(request.POST,request.FILES)
+        if pic_form.is_valid():
+            new_pic = pic_form.cleaned_data['profile_pic']
+            user.profile_pic = f'profile_pics/{new_pic}'
+            user.save()
+            pic_form.save()
+
+    return redirect(user_profile,user.id)

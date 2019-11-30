@@ -87,10 +87,10 @@
                     <div class="ui modal pic">
                         <div class="header">Change Profile Pic</div>
                         <div class="content">
-                            <form method="POST" class="ui form" enctype="multipart/form-data">
+                            <form action="{% url 'change_pic' %}" method="POST" class="ui form" enctype="multipart/form-data">
                                 {%csrf_token%}
                                 <div class="field">
-                                    <input type="file" name="profile_pic" id="">
+                                    {%render_field pic_form.profile_pic _no_label='true'%}
                                 </div>
                                 <button class="ui submit button">Upload</button>
                             </form>
