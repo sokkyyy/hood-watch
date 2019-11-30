@@ -52,3 +52,13 @@ class PublicService(models.Model):
 
     def __str__(self):
         return self.name
+
+class Post(models.Model):
+    category = models.CharField(max_length=100)
+    title = models.CharField(max_length=240)
+    description = models.TextField()
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='posts')
+    hood = models.ForeignKey(Hood,on_delete = models.CASCADE,related_name='posts')
+
+    def __str__(self):
+        return self.title
