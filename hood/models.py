@@ -1,8 +1,8 @@
 from django.db import models
-
-# Create your models here.
 from django.contrib.auth.models import AbstractUser
+# Create your models here.
 
+    
 class User(AbstractUser):
     email = models.EmailField(max_length=254, unique=True)
     full_name = models.CharField(max_length=254)
@@ -29,4 +29,13 @@ class Hood(models.Model):
     def __str__(self):
         return self.name
 
+class Business(models.Model):
+    name = models.CharField(max_length=240)
+    description = models.TextField()
+    category = models.CharField(max_length=240)
+    hood = models.ForeignKey(Hood,on_delete=models.CASCADE,related_name='businesses')
+    #contacts = HStoreField()
+    user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='businesses')
 
+    def __str__(self):
+        return self.name

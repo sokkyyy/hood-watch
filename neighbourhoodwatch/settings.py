@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'hood.apps.HoodConfig',
     'django_semantic_ui',
     'semanticuiforms',
+    'django.contrib.postgres',
 ]
 
 MIDDLEWARE = [
