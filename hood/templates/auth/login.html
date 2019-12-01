@@ -12,29 +12,38 @@
     {%block content%} 
     
     {%endblock%}
+
     <!-- Your HTML code -->
     <div class="ui grid">
         <div class="four wide column"></div>
-        <div class="eight wide column">
-            <form class="ui form" method="POST">
-                {% csrf_token %}
-    
-                {{form.non_field.errors}}
-    
-                <div class="field">
-                    {% render_field form.email %}
-                </div>
-    
-                <div class="field">
-                    {% render_field form.password %}
-                </div>
-                <button class="ui submit button">
-                    Login
-                </button>
-            </form>
+        <div class="eight wide column " style="margin-top: 100px;">
+            <div class="ui inverted form">
+                    <h3>LOGIN TO KIBRA HOOD WATCH</h3>
+                    <div class="ui inverted segment">
+                        
+                        <form class="ui inverted form" method="POST">
+                            {% csrf_token %}
+                            {{form.non_field.errors}}
+
+                            <div class="field">
+                              {% render_field form.email %}
+                            </div>
+                            <div class="field">
+                                {% render_field form.password %}
+                            </div>
+                          <button class="ui submit button" type="submit">Login</button>
+                        </form>
+                        <div><a href="#">Register</a></div>
+                    </div>
+            </div>
         </div>
         <div class="four wide column"></div>
     </div>
+    {%block footer%}
+    <footer style="position: fixed;bottom: 0; width: 100%;">
+        {%include 'footer.html'%}
+    </footer>
+    {%endblock%}
     {%block scripts%}
         {% dsu_jquery_url %}
         {% dsu_javascript_url %}

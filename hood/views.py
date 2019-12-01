@@ -59,7 +59,7 @@ def user_login(request):
     {"form":form})
 
 def user_logout(request):
-    logout(request,user)
+    logout(request)
     return redirect(user_login)
 
 def user_profile(request, user_id):
