@@ -95,6 +95,7 @@ def user_profile(request, user_id):
 def hood_services(request,hood):
     hood = Hood.objects.get(name=hood)
     posts = Post.objects.filter(hood=hood)
+    occupants = Hood.objects.filter(name=hood)
     public_services_police = PublicService.objects.filter(hood=hood,category='police')
     public_services_health = PublicService.objects.filter(hood=hood,category='health')
     #Businesses
@@ -108,7 +109,7 @@ def hood_services(request,hood):
     return render(request, 'services.html',{'hood':hood,
     'carpentry':carpentry,'posts':posts,'public_services_police':public_services_police,
     'public_services_health':public_services_health,'electronics':electronics,'hardware':hardware,
-    'liqour':liqour,'restaurant':restaurant,'salon':salon})
+    'liqour':liqour,'restaurant':restaurant,'salon':salon,'occupants':occupants})
 
 
 # Handles submissions for businesses
