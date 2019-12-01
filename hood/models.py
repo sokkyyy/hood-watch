@@ -35,7 +35,7 @@ class Business(models.Model):
     description = models.TextField()
     category = models.CharField(max_length=240)
     hood = models.ForeignKey(Hood,on_delete=models.CASCADE,related_name='businesses')
-    #contacts = HStoreField()
+    contacts = models.CharField(max_length=240,default='addcontacts')
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='businesses')
 
     def __str__(self):
