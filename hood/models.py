@@ -21,6 +21,15 @@ class Hood(models.Model):
     name = models.CharField(max_length=240)
     user = models.OneToOneField(User,on_delete=models.CASCADE)
 
+    def create_hood(self):
+        self.save()
+    def delete_hood(self):
+        self.delete()
+
+    @classmethod
+    def find_hood(cls,id):
+        hood = cls.objects.get(pk=id)
+        return hood
     @classmethod
     def get_user_hood(cls, user):
         hood = cls.objects.get(user=user)
@@ -37,6 +46,17 @@ class Business(models.Model):
     hood = models.ForeignKey(Hood,on_delete=models.CASCADE,related_name='businesses')
     contacts = models.CharField(max_length=240,default='')
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='businesses')
+
+    def create_business(self):
+        self.save()
+
+    def delete_business(self):
+        self.delete()
+    
+    @classmethod
+    def find_business(cls,id):
+        business = cls.objects.get(pk=id)
+        return business
 
     def __str__(self):
         return self.name
