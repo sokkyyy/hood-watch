@@ -27,7 +27,7 @@
                 <img class="right floated mini ui image" src="{{post.user.profile_pic.url}}">
                 <div class="header">{{post.title}}</div>
                 <hr>
-                <div class="meta">{{post.category}}|{{post.posted}}</div>
+                <div class="meta">{{post.category}}|{{post.posted|timesince}}</div>
                 <div class="description">
                   {{post.description}}
                 </div>
