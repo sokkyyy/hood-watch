@@ -48,6 +48,10 @@
                                             Register
                                         </button>
                                 </form>
+                                <div >
+                                    <span>Already have an account?</span>
+                                    <a href="{%url 'login' %}" style="color: white; text-decoration: underline;">Login</a>
+                                </div>
                             </div>
                     </div>
             </div>
@@ -57,7 +61,7 @@
     {%endblock%}
     {%block footer%}
     <footer style="margin-top: 50px;">
-        {%include 'footer.html'%}
+        {%include 'footer.html'%} 
     </footer>
     {%endblock%}
     {%block scripts%}

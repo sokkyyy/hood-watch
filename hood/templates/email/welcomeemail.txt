@@ -1,0 +1,4 @@
+Hello {{name}}
+
+Welcome to Kibra Hood Watch.
+Find everything regarding your location on our website. 

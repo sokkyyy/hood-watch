@@ -3,6 +3,7 @@ from .forms import RegForm,LoginForm,BusinessForm,PostForm,ChangePic
 from .models import User,Neighborhood,Hood,Business,Post,PublicService
 from django.contrib.auth import authenticate,login,logout
 from django import forms
+from .email import send_welcome_email
 # Create your views here.
 def home(request):
     return render(request, 'home.html')
@@ -23,6 +24,7 @@ def register(request):
             new_user = User.objects.create_user(username,email,password)
             new_user.full_name = full_name
             new_user.save()
+            send_welcome_email(full_name,email)
 
             #Neighbourhood Instatiations
             neighborhood = Neighborhood()
