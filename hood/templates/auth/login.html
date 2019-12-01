@@ -1,26 +1,44 @@
-{%extends 'base.html' %}
+{% load dsu %}
 {% load semanticui %}
-{%block content %}
-<div class="ui grid">
-    <div class="four wide column"></div>
-    <div class="eight wide column">
-        <form class="ui form" method="POST">
-            {% csrf_token %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Neighborhood Watch</title>
+    {% dsu_stylesheet_url %}
+</head>
+<body>
 
-            {{form.non_field.errors}}
-
-            <div class="field">
-                {% render_field form.email %}
-            </div>
-
-            <div class="field">
-                {% render_field form.password %}
-            </div>
-            <button class="ui submit button">
-                Login
-            </button>
-        </form>
+    {%block content%} 
+    
+    {%endblock%}
+    <!-- Your HTML code -->
+    <div class="ui grid">
+        <div class="four wide column"></div>
+        <div class="eight wide column">
+            <form class="ui form" method="POST">
+                {% csrf_token %}
+    
+                {{form.non_field.errors}}
+    
+                <div class="field">
+                    {% render_field form.email %}
+                </div>
+    
+                <div class="field">
+                    {% render_field form.password %}
+                </div>
+                <button class="ui submit button">
+                    Login
+                </button>
+            </form>
+        </div>
+        <div class="four wide column"></div>
     </div>
-    <div class="four wide column"></div>
-</div>
-{%endblock%}
+    {%block scripts%}
+        {% dsu_jquery_url %}
+        {% dsu_javascript_url %}
+    {%endblock%}
+</body>
+</html>
+

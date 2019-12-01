@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from .forms import RegForm,LoginForm,BusinessForm,PostForm,ChangePic
-from .models import User,Neighborhood,Hood,Business,Post
+from .models import User,Neighborhood,Hood,Business,Post,PublicService
 from django.contrib.auth import authenticate,login,logout
 from django import forms
 # Create your views here.
@@ -90,8 +90,11 @@ def hood_services(request,hood):
     hood = Hood.objects.get(name=hood)
     businesses = Business.objects.filter(hood=hood)
     posts = Post.objects.filter(hood=hood)
+    public_services_police = PublicService.objects.filter(hood=hood,category='police')
+    public_services_health = PublicService.objects.filter(hood=hood,category='health')
     return render(request, 'services.html',{'hood':hood,
-    'businesses':businesses,'posts':posts})
+    'businesses':businesses,'posts':posts,'public_services_police':public_services_police,
+    'public_services_health':public_services_health})
 
 
 # Handles submissions for businesses
