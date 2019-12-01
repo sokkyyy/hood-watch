@@ -89,17 +89,117 @@
             {%endfor%}
           </div>
       </div>
+
       <div class="four wide column">
-          <div class="ui accordion">
-            {%for business in businesses%}
-              <div class="title">
-                <i class="dropdown icon"></i>
-                {{business.name}}
-              </div>  
+          <div class="ui styled accordion">
+            <div class="title">
+              <i class="dropdown icon"></i>
+              Carpentry
+            </div>
+            {%for business in carpentry %}
               <div class="content">
-                <p class="transition hidden">{{business.description}}</p>
-                <p class="transition hidden">{{business.contacts}}</p>
+                <div class="accordion">
+                  <div class="title">
+                    <i class="dropdown icon"></i>
+                    {{business.name}}
+                  </div>
+                  <div class="content">
+                    <p>{{business.description}}</p>
+                    <p>Contacts: {{business.contacts}}</p>
+                  </div>
+                </div>
               </div>
+            {%endfor%}
+            <div class="title">
+                <i class="dropdown icon"></i>
+                Electronics
+            </div>
+            {%for business in electronics %}
+                <div class="content">
+                  <div class="accordion">
+                    <div class="title">
+                      <i class="dropdown icon"></i>
+                      {{business.name}}
+                    </div>
+                    <div class="content">
+                      <p>{{business.description}}</p>
+                      <p>Contacts: {{business.contacts}}</p>
+                    </div>
+                  </div>
+                </div>
+            {%endfor%}
+            <!--  -->
+            <div class="title">
+                <i class="dropdown icon"></i>
+                Hardware
+              </div>
+              {%for business in hardware %}
+                <div class="content">
+                  <div class="accordion">
+                    <div class="title">
+                      <i class="dropdown icon"></i>
+                      {{business.name}}
+                    </div>
+                    <div class="content">
+                      <p>{{business.description}}</p>
+                      <p>Contacts: {{business.contacts}}</p>
+                    </div>
+                  </div>
+                </div>
+            {%endfor%}
+            <div class="title">
+                <i class="dropdown icon"></i>
+                Liquor
+              </div>
+              {%for business in liqour %}
+                <div class="content">
+                  <div class="accordion">
+                    <div class="title">
+                      <i class="dropdown icon"></i>
+                      {{business.name}}
+                    </div>
+                    <div class="content">
+                      <p>{{business.description}}</p>
+                      <p>Contacts: {{business.contacts}}</p>
+                    </div>
+                  </div>
+                </div>
+            {%endfor%}
+            <div class="title">
+                <i class="dropdown icon"></i>
+                Restaurant
+              </div>
+              {%for business in restaurant %}
+                <div class="content">
+                  <div class="accordion">
+                    <div class="title">
+                      <i class="dropdown icon"></i>
+                      {{business.name}}
+                    </div>
+                    <div class="content">
+                      <p>{{business.description}}</p>
+                      <p>Contacts: {{business.contacts}}</p>
+                    </div>
+                  </div>
+                </div>
+            {%endfor%}
+            <div class="title">
+                <i class="dropdown icon"></i>
+                Salon
+              </div>
+              {%for business in salon %}
+                <div class="content">
+                  <div class="accordion">
+                    <div class="title">
+                      <i class="dropdown icon"></i>
+                      {{business.name}}
+                    </div>
+                    <div class="content">
+                      <p>{{business.description}}</p>
+                      <p>Contacts: {{business.contacts}}</p>
+                    </div>
+                  </div>
+                </div>
             {%endfor%}
           </div>
       </div>
