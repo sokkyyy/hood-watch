@@ -58,6 +58,10 @@ def user_login(request):
     return render(request, 'auth/login.html',
     {"form":form})
 
+def user_logout(request):
+    logout(request,user)
+    return redirect(user_login)
+
 def user_profile(request, user_id):
     user = User.objects.get(pk=user_id)
     hood = Hood.get_user_hood(user)
