@@ -121,6 +121,11 @@
                                                   <option value="salon">Salon & Beauty</option>
                                               </select>  
                                           </div>
+                                          <div class='field'>
+                                              <label>Contacts</label>
+                                              <label><small>Email or Phone Number</small></label>
+                                              {%render_field business_form.contacts _no_label='true' _placeholder='Contacts'%}
+                                          </div>
                                           <button type="submit" class="ui submit button">Add Business</button>
                                       </form>
                                 </div>

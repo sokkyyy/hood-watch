@@ -35,7 +35,7 @@ class LoginForm(forms.Form):
 class BusinessForm(forms.ModelForm):
     class Meta:
         model = Business
-        fields = ['name','description',]
+        fields = ['name','description','contacts']
 
 class PostForm(forms.ModelForm):
     class Meta:
