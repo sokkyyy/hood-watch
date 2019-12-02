@@ -4,7 +4,10 @@ from .models import User,Neighborhood,Hood,Business,Post,PublicService
 from django.contrib.auth import authenticate,login,logout
 from django import forms
 from .email import send_welcome_email
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
+@login_required(login_url='/login')
 def home(request):
     return render(request, 'home.html')
 
