@@ -146,5 +146,10 @@ AUTH_USER_MODEL = 'hood.User'
 #Media URLs
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+GULP_VERSION = '3.9.1'
+SEMANTIC_UI_VERSION = '^2.4.2'
+SEMANTIC_DIRNAME = 'semantic'
+DSU_JQUERY_URL = 'https://code.jquery.com/jquery-3.1.1.min.js'
+
 
 django_heroku.settings(locals())
