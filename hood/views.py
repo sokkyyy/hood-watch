@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate,login,logout
 from django import forms
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
-
+from django.http import Http404
 # Create your views here.
 @login_required(login_url='/login')
 def home(request):
@@ -96,6 +96,13 @@ def user_profile(request, user_id):
     'pic_form':pic_form})
 
 def hood_services(request,hood):
+    user = request.user
+    uh = user.hood.name
+    ho = hood
+    if not uh == ho:
+        raise Http404('You do not belong to this hood.')
+        
+
     hood = Hood.objects.get(name=hood)
     posts = Post.objects.filter(hood=hood)
     occupants = Hood.objects.filter(name=hood)

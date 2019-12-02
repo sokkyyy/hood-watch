@@ -2,10 +2,11 @@
     <a class="header active item" href="{% url 'home' %}">
       Home
     </a>
-    
+    {% if user.is_authenticated%}
     <a class="item" href="{%url 'services' user.hood.name%}">
       {{user.hood.name|capfirst}} Feed
     </a>
+    {%endif%}
     <div class="right menu">
       <div class="ui inverted compact menu">
         <div class="ui simple dropdown item">
