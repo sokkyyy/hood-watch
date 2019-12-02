@@ -6,6 +6,7 @@ from django import forms
 from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
+from django.db import IntegrityError
 # Create your views here.
 @login_required(login_url='/login')
 def home(request):
@@ -20,9 +21,6 @@ def register(request):
             full_name = form.cleaned_data['full_name']
             password = form.cleaned_data['password']
             location = request.POST['location']
-
-
-            
 
             new_user = User.objects.create_user(username,email,password)
             new_user.full_name = full_name
@@ -69,6 +67,11 @@ def user_logout(request):
 
 def user_profile(request, user_id):
     user = User.objects.get(pk=user_id)
+
+    if not user == request.user:
+        raise Http404('YOU CAN ONLY VIEW YOUR PROFILE!!!')
+
+    
     hood = Hood.get_user_hood(user)
 
     business_form = BusinessForm()
@@ -97,19 +100,20 @@ def user_profile(request, user_id):
 
 def hood_services(request,hood):
     user = request.user
-    uh = user.hood.name
-    ho = hood
-    if not uh == ho:
-        raise Http404('You do not belong to this hood.')
+    user_hood = user.hood.name
+
+    if not user_hood == hood:
+        raise Http404('YOU DO NOT BELONG TO THIS HOOD')
         
 
-    hood = Hood.objects.get(name=hood)
+    hood = Hood.objects.get(user=user)
     posts = Post.objects.filter(hood=hood)
     occupants = Hood.objects.filter(name=hood)
     public_services_police = PublicService.objects.filter(hood=hood,category='police')
     public_services_health = PublicService.objects.filter(hood=hood,category='health')
     #Businesses
     carpentry = Business.objects.filter(hood=hood,category='carpentry')
+    print(carpentry)
     electronics = Business.objects.filter(hood=hood,category='electronics')
     hardware = Business.objects.filter(hood=hood,category='hardware')
     liqour = Business.objects.filter(hood=hood,category='liqour')
@@ -131,7 +135,7 @@ def submit_business(request):
             new_business = form.save(commit=False)
             new_business.category = request.POST['category']
             new_business.user = user
-            new_business.hood = user.hood
+            new_business.hood = user.hood.name
             new_business.save()
     return redirect(user_profile,user.id)
 # Handles submissions for posts
@@ -143,7 +147,7 @@ def hood_posts(request,hood):
             post = form.save(commit=False)
             post.category = request.POST['category']
             post.user = request.user
-            post.hood = hood
+            post.hood = hood.name
             post.save()
     return redirect(user_profile, request.user.id)
 # Handle profile pic changes
@@ -155,6 +159,9 @@ def change_profile_pic(request):
             new_pic = pic_form.cleaned_data['profile_pic']
             user.profile_pic = f'profile_pics/{new_pic}'
             user.save()
-            pic_form.save()
+            try:
+                pic_form.save()
+            except IntegrityError:
+                print(None)
 
     return redirect(user_profile,user.id)

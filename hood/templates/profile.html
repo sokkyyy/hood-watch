@@ -98,7 +98,7 @@
                     </div>
                     <!-- MODAL FOR BUSINESS -->
                     <div class="ui modal business">
-                        <div class="header">Add A Business to {{hood.name}}</div>
+                        <div class="header">Add A Business to {{hood.name|capfirst}}</div>
                         <div class="content">
                                 <div class="three wide column">
                                       <form class='ui form' method="POST" action="{% url 'business'%}">
@@ -133,7 +133,7 @@
                     </div>
                     <!-- MODAL FOR POSTS -->
                     <div class="ui modal posts">
-                        <div class="header">Create A Post.{{hood.name}}</div>
+                        <div class="header">Create a Post for {{hood.name|capfirst}} Location</div>
 
                         <div class="content">
                                 <div class="three wide column">
@@ -176,8 +176,6 @@
                                 <option value="">Select your Location</option>
                                 <option value="woodley">Woodley</option>
                                 <option value="makina">Makina</option>
-                                <option value="sarangombe">Sarang'ombe</option>
-                                <option value="lainisaba">Laini Saba</option>
                                 <option value="lindi">Lindi</option>
                             </select>                        
                         </div>
@@ -201,12 +199,13 @@
           </div>
           <div class="ui bottom attached tab segment active" data-tab="first">
             <div class="ui cards">
+            {%if user_business%}
             {%for business in user_business %}
                 <div class="card">
                   <div class="content">
                     <div class="header">{{business.name}}</div>
                     <div class="meta">
-                        <span>{{business.category}}|{{business.hood.name}}</span>
+                        <span>{{business.category}}|{{business.hood|capfirst}}</span>
                         <span>{{business.contacts}}</span>
                     </div>
                     <div class="description">
@@ -215,18 +214,22 @@
                   </div>
                 </div>
             {%endfor%}
+            {%else%}
+            {%endif%}
+            <div><p>No businesses.</p></div>
             </div> 
           </div>
 
           <div class="ui bottom attached tab segment" data-tab="second">
                 <div class="ui cards">
+                    {%if user_posts %}
                     {%for post in user_posts %}
                     <div class="card">
                       <div class="content">
                         <div class="header">{{post.title}}</div>
                         <hr>
                         <div class="meta">
-                            <span>{{post.category}}|{{post.hood.name}}</span>
+                            <span>{{post.category}}|{{post.hood|capfirst}}</span>
                         </div>
                         <div class="description">
                             {{post.description}}
@@ -234,6 +237,9 @@
                       </div>
                     </div>
                     {%endfor%}
+                    {%else%}
+                    <div><p>No Posts.</p></div>
+                    {%endif%}
                 </div>
           </div>
           <div class="ui bottom attached tab segment" data-tab="third">
