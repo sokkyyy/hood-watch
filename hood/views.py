@@ -7,6 +7,7 @@ from .email import send_welcome_email
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.db import IntegrityError
+from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 @login_required(login_url='/login')
 def home(request):
@@ -66,12 +67,15 @@ def user_logout(request):
     return redirect(user_login)
 
 def user_profile(request, user_id):
-    user = User.objects.get(pk=user_id)
+    try:
+        user = User.objects.get(pk=user_id)
+    except ObjectDoesNotExist:
+        raise Http404()
 
     if not user == request.user:
         raise Http404('YOU CAN ONLY VIEW YOUR PROFILE!!!')
 
-    
+
     hood = Hood.get_user_hood(user)
 
     business_form = BusinessForm()
@@ -105,8 +109,11 @@ def hood_services(request,hood):
     if not user_hood == hood:
         raise Http404('YOU DO NOT BELONG TO THIS HOOD')
         
+    try:
+        hood = Hood.objects.get(user=user)
+    except ObjectDoesNotExist:
+        raise Http404()
 
-    hood = Hood.objects.get(user=user)
     posts = Post.objects.filter(hood=hood)
     occupants = Hood.objects.filter(name=hood)
     public_services_police = PublicService.objects.filter(hood=hood,category='police')
