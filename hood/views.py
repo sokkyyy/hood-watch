@@ -62,10 +62,12 @@ def user_login(request):
     return render(request, 'auth/login.html',
     {"form":form})
 
+@login_required(login_url='/login')
 def user_logout(request):
     logout(request)
     return redirect(user_login)
 
+@login_required(login_url='/login')
 def user_profile(request, user_id):
     try:
         user = User.objects.get(pk=user_id)
@@ -102,6 +104,7 @@ def user_profile(request, user_id):
     'user_business':user_business,'user_posts':user_posts,
     'pic_form':pic_form})
 
+@login_required(login_url='/login')
 def hood_services(request,hood):
     user = request.user
     user_hood = user.hood.name
@@ -134,6 +137,7 @@ def hood_services(request,hood):
 
 
 # Handles submissions for businesses
+@login_required(login_url='/login')
 def submit_business(request):
     user = request.user
     if request.method == 'POST':
@@ -146,6 +150,7 @@ def submit_business(request):
             new_business.save()
     return redirect(user_profile,user.id)
 # Handles submissions for posts
+@login_required(login_url='/login')
 def hood_posts(request,hood):
     hood = Hood.objects.get(name=hood)
     if request.method == 'POST':
@@ -158,6 +163,7 @@ def hood_posts(request,hood):
             post.save()
     return redirect(user_profile, request.user.id)
 # Handle profile pic changes
+@login_required(login_url='/login')
 def change_profile_pic(request):
     user = request.user
     if request.method == 'POST':
