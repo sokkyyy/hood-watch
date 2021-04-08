@@ -1,7 +1,7 @@
 astroid==2.3.3
 config==0.3.9
 dj-database-url==0.5.0
-Django==2.2.7
+Django==2.2.20
 django-heroku==0.3.1
 django-semanticui-forms==1.6.5
 django2-semantic-ui==1.2.2
